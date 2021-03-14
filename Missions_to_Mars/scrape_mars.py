@@ -43,13 +43,44 @@ def scrape():
 
     browser.quit()
 
-    mars_data = {
-        "news_title": news_title,
-        "news_p": news_p,
-        # "featured_image_url": featured_image_url,
-        "fact_table": table_html
-        # "hemisphere_image_urls": hemisphere_image_urls
-    }
+ ####  MARS HEMISPHERES SECTIONS #####
+    browser = init_browser()
+    all_hemispheres = soup.find('div', class_='collapsible results')
+    hemispheres = all_hemispheres.find_all('div', class_='item')
 
-    # Return results
-    return mars_data
+    beginning_url = 'https://astrogeology.usgs.gov'
+
+    hemisphere_image_urls = []
+
+    for result in hemispheres:
+        hemisphere = result.find('div', class_="description")
+        title = hemisphere.h3.text
+
+        ending_url = hemisphere.a["href"]
+        browser.visit(beginning_url + ending_url)
+
+        image_html = browser.html
+        image_soup = BeautifulSoup(image_html, 'html.parser')
+
+        image_link = image_soup.find('div', class_='downloads')
+        image_url = image_link.find('li').a['href']
+
+        hemisphere_dict = {}
+        hemisphere_dict['title'] = title
+        hemisphere_dict['img_url'] = image_url
+
+        hemisphere_image_urls.append(hemisphere_dict)
+
+
+    hemisphere_image_urls
+
+mars_data = {
+    "news_title": news_title,
+    "news_p": news_p,
+    # "featured_image_url": featured_image_url,
+    "fact_table": table_html
+    # "hemisphere_image_urls": hemisphere_image_urls
+}
+
+# Return results
+return mars_data
