@@ -60,7 +60,7 @@ def scrape():
         browser.visit(beginning_url + ending_url)
 
         image_html = browser.html
-        image_soup = BeautifulSoup(image_html, 'html.parser')
+        image_soup = bs(image_html, 'html.parser')
 
         image_link = image_soup.find('div', class_='downloads')
         image_url = image_link.find('li').a['href']
@@ -71,16 +71,16 @@ def scrape():
 
         hemisphere_image_urls.append(hemisphere_dict)
 
+        browser.quit()
 
-    hemisphere_image_urls
 
-mars_data = {
-    "news_title": news_title,
-    "news_p": news_p,
-    # "featured_image_url": featured_image_url,
-    "fact_table": table_html
-    # "hemisphere_image_urls": hemisphere_image_urls
-}
+    mars_data = {
+        "news_title": news_title,
+        "news_p": news_p,
+        # "featured_image_url": featured_image_url,
+        "fact_table": table_html,
+        "hemisphere.img_url": hemisphere_image_urls
+    }
 
-# Return results
-return mars_data
+    # Return results
+    return mars_data
