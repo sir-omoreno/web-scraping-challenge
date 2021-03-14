@@ -16,20 +16,20 @@ def home():
     return render_template("index.html", mars=mars_data)
 
 
-# @app.route("/scrape")
-# def scrape():
+@app.route("/scrape")
+def scrape():
 
-#     mars_dict = mongo.db.mars_dict
+    mars_dict = mongo.db.mars_data
 
-#     # Run the scrape function
-#     mars_data = scrape_mars.scrape()
+    # Run the scrape function
+    mars_data = scrape_mars.scrape()
 
-#     # Update the Mongo database using update and upsert=True
-#     mars_data.update({}, mars_data, upsert=True)
+    # Update the Mongo database using update and upsert=True
+    mars_dict.update({}, mars_data, upsert=True)
 
 
-#     # Redirect back to home page
-#     return redirect("/")
+    # Redirect back to home page
+    return redirect("/")
 
 
 if __name__ == "__main__":
