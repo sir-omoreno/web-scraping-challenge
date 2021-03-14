@@ -6,11 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Mission to Mars</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  
+
 </head>
 
 <body>
@@ -26,19 +27,21 @@
         <h2 style="text-align:center;" class="text-warning bg-dark"><u>Latest Mars News</u></h2>
       </div>
     </div>
-  </br>
+    </br>
     <div class="row">
       <div class="col-md-12">
         <h4>{{mars.news_title}}</h4>
         <p>{{mars.news_p}}</p>
       </div>
     </div>
-  <hr>
+    <hr>
     <div class="row">
       <div class="col-md-8 border">
-        <h2 style="text-align: center;" class="text-danger"><u>Featured Mars Image</u></h2> 
+        <h2 style="text-align: center;" class="text-danger"><u>Featured Mars Image</u></h2>
         </br>
-        <img width="700 px" height="450 px" src="{{mars.featured_image_url}}" alt="Features Mars Image">
+        <!-- <img width="700 px" height="450 px" src="{{mars.featured_image_url}}" alt="Features Mars Image"> -->
+        <!-- IMAGE HARD CODED. FEATURED IMAGES REMOVED FROM OGIRINAL SITE, NOT ABLE TO SCRAPE -->
+        <img width="700 px" height="450 px" src="https://www.jpl.nasa.gov/spaceimages/images/largesize/PIA16225_hires.jpg" alt="Features Mars Image">
       </div>
       <div class="col-md-4">
         <div class="border">
@@ -49,35 +52,34 @@
         </br>
         <div class="border">
           <h5 style="text-align: center;" class="text-danger">Mars Facts</h5>
-            {{ mars.fact_table | safe }}
+          {{ mars.fact_table | safe }}
         </div>
       </div>
     </div>
-  <hr>
-    <div class="row">
-      <div class="col-md-12">
-        <h2 style="text-align:center;" class="text-warning bg-dark"><u>Mars hemispheres</u></h2>  
-      </div>
-    </div>
-    </br>
-    <div class="row">       
-            {% for hemisphere in mars.hemispheres_images %} 
-              <div class="col-6 border">
-              </br>
-                    <div>
-                      <img width="400 px" height="400 px" src="{{ hemisphere.image_url }}">
-                    </div>
+    <hr>
+    <!--The 4 Mars Hemispheres-->
+    <div class="container text-center">
+      <div class="row">
+          <h1>Mars Hemispheres</h1>
+          <div class="row">
 
-                    <div>
-                      <h4> {{ hemisphere.title }} </h4>  
-                    </div>
-            
+              {% for dict in mars.hemisphere_image_urls %}
+
+              <div class="col-lg-6">
+                  <div class="card">
+                      <div class="card-body">
+                          <h4 class="card-title">{{ dict.title }}</h4>
+                          <img src='{{ dict.img_url }}' class="img-fluid" alt={{ dict.title }}>
+                      </div>
+                  </div>
               </div>
-            {% endfor %}
-    </div> 
 
-  <hr>
-  
+              {% endfor %}
+
+          </div>
+      </div>
+  </div>
+
 </body>
 
 </html>
