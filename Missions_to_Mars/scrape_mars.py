@@ -50,7 +50,7 @@ def scrape():
     browser.visit(mars_hemispheres_url)
     test_html = browser.html
     soup = bs(test_html,'html')
-    time.sleep(5)
+    time.sleep(10)
 
     all_hemispheres = soup.find('div', class_='collapsible results')
     hemispheres = all_hemispheres.find_all('div', class_='item')
@@ -75,8 +75,6 @@ def scrape():
         hemisphere_dict['img_url'] = image_url
 
         hemisphere_image_urls.append(hemisphere_dict)
-
-        browser.quit()
 
 
     mars_data = {
