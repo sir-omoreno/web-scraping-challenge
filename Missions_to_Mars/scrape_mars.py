@@ -45,11 +45,16 @@ def scrape():
 
  ####  MARS HEMISPHERES SECTIONS #####
     browser = init_browser()
+
+    mars_hemispheres_url = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
+    browser.visit(mars_hemispheres_url)
+    test_html = browser.html
+    soup = bs(test_html,'html')
+    time.sleep(5)
+
     all_hemispheres = soup.find('div', class_='collapsible results')
     hemispheres = all_hemispheres.find_all('div', class_='item')
-
     beginning_url = 'https://astrogeology.usgs.gov'
-
     hemisphere_image_urls = []
 
     for result in hemispheres:
