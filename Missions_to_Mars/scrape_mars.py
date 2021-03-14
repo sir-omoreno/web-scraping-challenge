@@ -50,7 +50,7 @@ def scrape():
     browser.visit(mars_hemispheres_url)
     test_html = browser.html
     soup = bs(test_html,'html')
-    time.sleep(10)
+    time.sleep(5)
 
     all_hemispheres = soup.find('div', class_='collapsible results')
     hemispheres = all_hemispheres.find_all('div', class_='item')
@@ -82,7 +82,7 @@ def scrape():
         "news_p": news_p,
         # "featured_image_url": featured_image_url,
         "fact_table": table_html,
-        "hemisphere.img_url": hemisphere_image_urls
+        "hemispheres.images": hemisphere_image_urls
     }
 
     # Return results
